@@ -8,7 +8,7 @@ const Header = () => {
 
     return (
         <header className={styles.header}>
-            <p className={styles.title}>Where in the world?</p>
+            <h1 className={styles.title}>Where in the world?</h1>
             <button
                 className={styles.darkModeButton}
                 onClick={() => toggleDark()}

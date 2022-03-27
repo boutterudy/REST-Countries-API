@@ -43,7 +43,7 @@ const CountriesList = () => {
     } else {
         content = filterCountries(countries).map((country, index) => {
             return (
-                <Link href={"/countries/" + country.name} key={index} passHref>
+                <Link href={"/countries/" + country.name} key={index}>
                     <div className={styles.countryCard}>
                         <div className={styles.flagContainer}>
                             <Image

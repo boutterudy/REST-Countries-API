@@ -4,6 +4,10 @@ const nextConfig = {
     images: {
         domains: ["upload.wikimedia.org", "flagcdn.com"],
     },
+    i18n: {
+        locales: ["en"],
+        defaultLocale: "en",
+    },
 };
 
 module.exports = nextConfig;
