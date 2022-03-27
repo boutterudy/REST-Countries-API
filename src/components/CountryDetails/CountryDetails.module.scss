@@ -62,6 +62,10 @@
                 width: 450px;
             }
 
+            &.noBorder {
+                justify-content: flex-start;
+            }
+
             .title {
                 font-weight: 900;
                 font-size: 1.8rem;

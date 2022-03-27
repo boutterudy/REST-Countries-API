@@ -7,6 +7,7 @@
     border: none;
     padding: 14.5px 24px;
     cursor: pointer;
+    user-select: none;
 
     @include themed() {
         color: t($text);

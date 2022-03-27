@@ -55,6 +55,7 @@
         overflow: hidden;
         box-shadow: $shadow;
         cursor: pointer;
+        user-select: none;
 
         @include themed() {
             color: t($text);

@@ -43,14 +43,13 @@ const FilterByRegionDropdown = ({ className }: Props) => {
                         ? styles.open + " " + styles.dropdownContent
                         : styles.dropdownContent
                 }
-                id="filterByRegionDropdownContent"
             >
                 {regions.map((reg, index) => (
                     <li
                         key={index}
+                        className={reg === region ? styles.applied : ""}
                         onClick={(e) => {
                             setRegion(reg !== region ? reg : null);
-                            console.log(region);
                         }}
                     >
                         {reg}

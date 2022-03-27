@@ -41,13 +41,13 @@ const CountryDetails = ({ country }: Props) => {
                 }
             }
         });
-    }, [country]);
+    }, [country, router]);
 
     useEffect(() => {
         if (details !== undefined) {
             setFavicon(details.flags.svg);
         }
-    }, [details]);
+    }, [details, setFavicon]);
 
     let content;
     if (details === undefined || borders === undefined) {
@@ -65,7 +65,13 @@ const CountryDetails = ({ country }: Props) => {
                         objectPosition="50% 0"
                     />
                 </div>
-                <div className={styles.informations}>
+                <div
+                    className={
+                        borders.length > 0
+                            ? styles.informations
+                            : styles.informations + " " + styles.noBorder
+                    }
+                >
                     <h2 className={styles.title}>{details.name}</h2>
                     <div className={styles.details}>
                         <div>
