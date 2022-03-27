@@ -1,0 +1,96 @@
+@use "src/styles/color-themes" as *;
+@use "src/styles/variables" as *;
+
+.filters {
+    position: relative;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 0;
+    margin-bottom: 46px;
+
+    .input {
+        width: 476px;
+        margin-right: 10px;
+        @media (max-width: $bp-tablet) {
+            margin-bottom: 10px;
+            margin-right: 0;
+        }
+    }
+
+    @media (max-width: $bp-tablet) {
+        flex-wrap: wrap;
+    }
+}
+
+.loader {
+    display: block;
+    margin: auto;
+}
+
+.countriesList {
+    position: relative;
+    z-index: 50;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(255px, 255px));
+    grid-column-gap: 25px;
+    grid-row-gap: 25px;
+    justify-content: space-between;
+    align-items: flex-start;
+
+    @media (max-width: $bp-mobile) {
+        justify-content: center;
+        grid-template-columns: 100%;
+    }
+
+    &.loading {
+        display: block;
+    }
+
+    .countryCard {
+        position: relative;
+        width: 100%;
+        border-radius: $border-radius;
+        overflow: hidden;
+        box-shadow: $shadow;
+        cursor: pointer;
+
+        @include themed() {
+            color: t($text);
+            background-color: t($card-bg);
+        }
+
+        .flagContainer {
+            width: 100%;
+            height: 156px;
+            position: relative;
+
+            @media (max-width: $bp-mobile) {
+                aspect-ratio: 2/1;
+                height: unset;
+            }
+        }
+
+        .informations {
+            padding: 30px 24px;
+            font-size: $text-size;
+
+            p {
+                margin-top: 5px;
+                margin-bottom: 5px;
+            }
+
+            .name {
+                font-weight: 800;
+                margin-top: 0;
+                margin-bottom: 26px;
+                font-size: 1.2rem;
+            }
+
+            .field {
+                font-weight: 600;
+            }
+        }
+    }
+}

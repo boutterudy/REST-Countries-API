@@ -1,0 +1,63 @@
+@use "colors" as *;
+
+$themes: (
+    default: (
+        bg: $bg--light,
+        card-bg: $white,
+        text: $text--light,
+        input: $input--light,
+    ),
+    dark: (
+        bg: $bg--dark,
+        card-bg: $element--color--dark,
+        text: $white,
+        input: $element--color--dark,
+    ),
+);
+
+$bg: "bg";
+$card-bg: "card-bg";
+$text: "text";
+$input: "input";
+
+@mixin themed() {
+    @each $theme, $map in $themes {
+        :global(.theme--#{$theme}) & {
+            $theme-map: () !global;
+            @each $key, $submap in $map {
+                $value: map-get(map-get($themes, $theme), "#{$key}");
+                $theme-map: map-merge(
+                    $theme-map,
+                    (
+                        $key: $value,
+                    )
+                ) !global;
+            }
+            @content;
+            $theme-map: null !global;
+        }
+    }
+}
+
+@mixin gthemed() {
+    @each $theme, $map in $themes {
+        .theme--#{$theme} & {
+            $theme-map: () !global;
+            @each $key, $submap in $map {
+                $value: map-get(map-get($themes, $theme), "#{$key}");
+                $theme-map: map-merge(
+                    $theme-map,
+                    (
+                        $key: $value,
+                    )
+                ) !global;
+            }
+            @content;
+            $theme-map: null !global;
+        }
+    }
+}
+
+@function t($key) {
+    @return map-get($theme-map, $key);
+}

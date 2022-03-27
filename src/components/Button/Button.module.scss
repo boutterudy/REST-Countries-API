@@ -1,0 +1,15 @@
+@use "src/styles/color-themes" as *;
+@use "src/styles/variables" as *;
+
+.button {
+    border-radius: $border-radius;
+    box-shadow: $shadow;
+    border: none;
+    padding: 14.5px 24px;
+    cursor: pointer;
+
+    @include themed() {
+        color: t($text);
+        background-color: t($card-bg);
+    }
+}

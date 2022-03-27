@@ -1,0 +1,46 @@
+@use "src/styles/color-themes" as *;
+@use "src/styles/variables" as *;
+
+.searchBar {
+    position: relative;
+
+    .icon {
+        font-size: 1rem;
+        position: absolute;
+        top: 35%;
+        left: 32px;
+
+        @include themed() {
+            color: t($text);
+        }
+    }
+
+    .input {
+        font-size: $text-size;
+        padding: 18px 74px;
+        width: 100%;
+        border: none;
+        border-radius: $border-radius;
+        box-shadow: $shadow;
+
+        @media (max-width: $bp-tablet) {
+            padding: 18px 18px 18px 74px;
+        }
+
+        @include themed() {
+            color: t($text);
+            background-color: t($card-bg);
+        }
+
+        &::placeholder {
+            opacity: 0.8;
+            @include themed() {
+                color: t($text);
+            }
+        }
+
+        &:focus {
+            outline: none;
+        }
+    }
+}

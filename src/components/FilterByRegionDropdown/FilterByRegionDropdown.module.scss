@@ -1,0 +1,57 @@
+@use "src/styles/color-themes" as *;
+@use "src/styles/variables" as *;
+
+.dropdown {
+    .dropdownButton {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: relative;
+        width: 180px;
+        height: fit-content;
+        border-radius: $border-radius;
+        box-shadow: $shadow;
+        border: none;
+        padding: 16px 10px 16px 24px;
+        cursor: pointer;
+        font-size: $text-size;
+
+        .icon {
+            font-size: 1.5rem;
+        }
+    }
+
+    .dropdownContent {
+        display: none;
+
+        &.open {
+            display: block;
+            position: absolute;
+            width: 180px;
+            border-radius: $border-radius;
+            box-shadow: $shadow;
+            list-style: none;
+            margin-top: 4px;
+            padding: 0;
+            font-size: $text-size;
+
+            @include themed() {
+                color: t($text);
+                background-color: t($card-bg);
+            }
+
+            li {
+                cursor: pointer;
+                padding: 4.5px 10px 4.5px 24px;
+
+                &:first-of-type {
+                    padding-top: 20px;
+                }
+
+                &:last-of-type {
+                    padding-bottom: 20px;
+                }
+            }
+        }
+    }
+}

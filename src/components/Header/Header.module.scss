@@ -1,0 +1,44 @@
+@use "src/styles/color-themes" as *;
+@use "src/styles/variables" as *;
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 70px;
+    padding: 0px 70px;
+    box-shadow: $shadow;
+
+    @include themed() {
+        color: t($text);
+        background-color: t($card-bg);
+    }
+
+    @media (max-width: $bp-tablet) {
+        padding: 0 22px;
+    }
+
+    .title {
+        font-weight: 800;
+        font-size: 1.3rem;
+    }
+
+    .darkModeButton {
+        background-color: unset;
+        border: none;
+        cursor: pointer;
+        font-size: $text-size;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+
+        @include themed() {
+            color: t($text);
+        }
+
+        .icon {
+            margin-right: 10px;
+            font-size: calc($text-size + 0.2rem);
+        }
+    }
+}
