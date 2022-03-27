@@ -1,6 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { useContext, useEffect, useState } from "react";
+import { FaviconContext } from "../../context/FaviconContext";
 import { FiltersContext } from "../../context/FiltersContext";
 import Country from "../../types/country";
 import DataFormatter from "../../utils/DataFormatter";
@@ -13,11 +15,26 @@ import styles from "./CountriesList.module.scss";
 const CountriesList = () => {
     const [countries, setCountries] = useState<Country[]>([]);
     const { filterCountries } = useContext(FiltersContext);
+    const { setFavicon } = useContext(FaviconContext);
+    const router = useRouter();
 
     useEffect(() => {
         const result = RestCountries.all();
         result.then((value) => setCountries(value));
     }, []);
+
+    useEffect(() => {
+        const intervalId = setInterval(() => {
+            if (countries.length > 0) {
+                let newIcon =
+                    countries[Math.floor(Math.random() * countries.length)]
+                        .flags.svg;
+                setFavicon(newIcon);
+            }
+        }, 1000);
+
+        return () => window.clearInterval(intervalId);
+    }, [countries, setFavicon]);
 
     let content;
     let loading = countries.length === 0;

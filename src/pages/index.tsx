@@ -9,24 +9,6 @@ import Country from "../types/country";
 import RestCountries from "../utils/RestCountries";
 
 const Home: NextPage = () => {
-    const [countries, setCountries] = useState<Country[]>([]);
-    const { setFavicon } = useContext(FaviconContext);
-    const router = useRouter();
-
-    useEffect(() => {
-        const result = RestCountries.all();
-        result.then((value) => setCountries(value));
-        const intervalId = setInterval(() => {
-            if (countries.length > 0) {
-                let newIcon =
-                    countries[Math.floor(Math.random() * countries.length)]
-                        .flags.svg;
-                setFavicon(newIcon);
-            }
-        }, 1000);
-
-        return () => window.clearInterval(intervalId);
-    }, [router.asPath]);
     return (
         <div>
             <Head>
