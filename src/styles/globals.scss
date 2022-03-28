@@ -12,6 +12,10 @@ a {
     text-decoration: none;
 }
 
+.preload * {
+    transition: none !important;
+}
+
 * {
     box-sizing: border-box;
     font-family: "Nunito Sans", sans-serif;
