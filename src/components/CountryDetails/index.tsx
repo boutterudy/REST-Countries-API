@@ -72,6 +72,7 @@ const CountryDetails = ({ country }: Props) => {
                             quality={100}
                             objectFit="contain"
                             objectPosition="50% 0"
+                            priority={true}
                         />
                     </div>
                     <div

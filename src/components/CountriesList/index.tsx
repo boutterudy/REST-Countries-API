@@ -63,6 +63,7 @@ const CountriesList = () => {
                                 quality={100}
                                 className={styles.flag}
                                 objectPosition="50% 50%"
+                                priority={true}
                             />
                         </div>
                         <div className={styles.informations}>
