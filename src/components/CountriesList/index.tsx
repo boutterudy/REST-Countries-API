@@ -86,7 +86,9 @@ const CountriesList = () => {
                                     <span className={styles.field}>
                                         Capital:
                                     </span>{" "}
-                                    {country.capital}
+                                    {country.capital
+                                        ? country.capital
+                                        : "No capital"}
                                 </li>
                             </ul>
                         </div>
