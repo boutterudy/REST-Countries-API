@@ -56,10 +56,7 @@ class MyDocument extends Document {
                           var isDarkMode = d.classList.contains(classNameDark);
                           localStorage.setItem(storageKey, JSON.stringify(isDarkMode));
                         }
-                        d.add('preload');
-                        window.document.onload = () => {
-                          d.remove('preload');
-                        }
+                        d.classList.add('preload');
                       })();
                     `,
                         }}

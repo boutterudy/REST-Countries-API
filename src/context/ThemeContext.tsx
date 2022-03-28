@@ -15,6 +15,8 @@ const ThemeProvider = ({ children }: Props) => {
     const [dark, setDark] = useState(false);
 
     useEffect(() => {
+        const d = document.documentElement;
+        d.classList.remove("preload");
         const lsDark = localStorage.getItem("dark");
         if (lsDark !== null) {
             setDark(JSON.parse(lsDark));
@@ -24,7 +26,6 @@ const ThemeProvider = ({ children }: Props) => {
     const toggleDark = () => {
         const d = document.documentElement;
         const themes = ["theme--default", "theme--dark"];
-        console.log("document", d);
         if (dark) {
             d.classList.remove(...themes);
             d.classList.add("theme");
