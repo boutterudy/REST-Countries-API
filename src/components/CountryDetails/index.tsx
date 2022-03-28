@@ -23,7 +23,9 @@ const CountryDetails = ({ country }: Props) => {
     const router = useRouter();
 
     useEffect(() => {
-        const countryDetails = RestCountries.get(country);
+        const countryDetails = RestCountries.get(
+            DataFormatter.uriToCountryName(country)
+        );
         countryDetails.then((value) => {
             if (value.status === 404) {
                 router.replace("/");
@@ -54,97 +56,118 @@ const CountryDetails = ({ country }: Props) => {
         content = <Loader className={styles.loader} />;
     } else {
         content = (
-            <div className={styles.country}>
-                <div className={styles.flagContainer}>
-                    <Image
-                        src={details.flags.svg}
-                        alt={details.name + " flag"}
-                        layout="fill"
-                        quality={100}
-                        objectFit="contain"
-                        objectPosition="50% 0"
-                    />
-                </div>
-                <div
-                    className={
-                        borders.length > 0
-                            ? styles.informations
-                            : styles.informations + " " + styles.noBorder
-                    }
-                >
-                    <h2 className={styles.title}>{details.name}</h2>
-                    <div className={styles.details}>
-                        <div>
-                            <p>
-                                <span className={styles.field}>
-                                    Native Name:
-                                </span>{" "}
-                                {details.nativeName}
-                            </p>
-                            <p>
-                                <span className={styles.field}>
-                                    Population:
-                                </span>{" "}
-                                {DataFormatter.formatNumber(details.population)}
-                            </p>
-                            <p>
-                                <span className={styles.field}>Region:</span>{" "}
-                                {details.region}
-                            </p>
-                            <p>
-                                <span className={styles.field}>
-                                    Sub Region:
-                                </span>{" "}
-                                {details.subregion}
-                            </p>
-                            <p>
-                                <span className={styles.field}>Capital:</span>{" "}
-                                {details.capital}
-                            </p>
-                        </div>
-                        <div>
-                            <p>
-                                <span className={styles.field}>
-                                    Top Level Domain:
-                                </span>{" "}
-                                {details.topLevelDomain}
-                            </p>
-                            <p>
-                                <span className={styles.field}>
-                                    Currencies:
-                                </span>{" "}
-                                {details.currencies
-                                    .map((cur) => cur.name)
-                                    .join(", ")}
-                            </p>
-                            <p>
-                                <span className={styles.field}>Languages:</span>{" "}
-                                {details.languages
-                                    .map((lang) => lang.name)
-                                    .join(", ")}
-                            </p>
-                        </div>
+            <div>
+                <Head>
+                    <title>
+                        {details.name} - REST Countries API with color theme
+                        switcher
+                    </title>
+                </Head>
+                <div className={styles.country}>
+                    <div className={styles.flagContainer}>
+                        <Image
+                            src={details.flags.svg}
+                            alt={details.name + " flag"}
+                            layout="fill"
+                            quality={100}
+                            objectFit="contain"
+                            objectPosition="50% 0"
+                        />
                     </div>
-                    {borders.length > 0 ? (
-                        <div className={styles.borderCountries}>
+                    <div
+                        className={
+                            borders.length > 0
+                                ? styles.informations
+                                : styles.informations + " " + styles.noBorder
+                        }
+                    >
+                        <h2 className={styles.title}>{details.name}</h2>
+                        <ul className={styles.details}>
+                            <div>
+                                <li>
+                                    <span className={styles.field}>
+                                        Native Name:
+                                    </span>{" "}
+                                    {details.nativeName}
+                                </li>
+                                <li>
+                                    <span className={styles.field}>
+                                        Population:
+                                    </span>{" "}
+                                    {DataFormatter.formatNumber(
+                                        details.population
+                                    )}
+                                </li>
+                                <li>
+                                    <span className={styles.field}>
+                                        Region:
+                                    </span>{" "}
+                                    {details.region}
+                                </li>
+                                <li>
+                                    <span className={styles.field}>
+                                        Sub Region:
+                                    </span>{" "}
+                                    {details.subregion}
+                                </li>
+                                <li>
+                                    <span className={styles.field}>
+                                        Capital:
+                                    </span>{" "}
+                                    {details.capital
+                                        ? details.capital
+                                        : "No capital"}
+                                </li>
+                            </div>
+                            <div>
+                                <li>
+                                    <span className={styles.field}>
+                                        Top Level Domain:
+                                    </span>{" "}
+                                    {details.topLevelDomain}
+                                </li>
+                                <li>
+                                    <span className={styles.field}>
+                                        Currencies:
+                                    </span>{" "}
+                                    {details.currencies === undefined
+                                        ? "No currency"
+                                        : details.currencies
+                                              .map((cur) => cur.name)
+                                              .join(", ")}
+                                </li>
+                                <li>
+                                    <span className={styles.field}>
+                                        Languages:
+                                    </span>{" "}
+                                    {details.languages
+                                        .map((lang) => lang.name)
+                                        .join(", ")}
+                                </li>
+                            </div>
+                        </ul>
+                        <ul className={styles.borderCountries}>
                             <p>
                                 <span className={styles.field}>
                                     Border Countries:
                                 </span>
+                                {borders.length === 0 ? " No country" : null}
                             </p>
-                            <div className={styles.list}>
-                                {borders.map((country, index) => (
-                                    <Link
-                                        href={"/countries/" + country.name}
-                                        key={index}
-                                        passHref
-                                    >
-                                        <button>{country.name}</button>
-                                    </Link>
-                                ))}
-                            </div>
-                        </div>
-                    ) : null}
+                            {borders.length > 0 ? (
+                                <li className={styles.list}>
+                                    {borders.map((country, index) => (
+                                        <Link
+                                            href={"/countries/" + country.name}
+                                            key={index}
+                                            passHref
+                                        >
+                                            <button>{country.name}</button>
+                                        </Link>
+                                    ))}
+                                </li>
+                            ) : null}
+                        </ul>
+                    </div>
                 </div>
             </div>
         );

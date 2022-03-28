@@ -11,10 +11,11 @@ import FilterByRegionDropdown from "../FilterByRegionDropdown";
 import Loader from "../Loader";
 import SearchBar from "../SearchBar";
 import styles from "./CountriesList.module.scss";
+import noResultImage from "../../public/no-result.png";
 
 const CountriesList = () => {
     const [countries, setCountries] = useState<Country[]>([]);
-    const { filterCountries } = useContext(FiltersContext);
+    const { filterCountries, searchBar, region } = useContext(FiltersContext);
     const { setFavicon } = useContext(FaviconContext);
     const router = useRouter();
 
@@ -36,14 +37,22 @@ const CountriesList = () => {
         return () => window.clearInterval(intervalId);
     }, [countries, setFavicon]);
 
-    let content;
+    let content: React.ReactElement[] | React.ReactElement;
+    let noResult = false;
     let loading = countries.length === 0;
     if (loading) {
         content = <Loader className={styles.loader} />;
     } else {
+        // Filter countries
         content = filterCountries(countries).map((country, index) => {
             return (
-                <Link href={"/countries/" + country.name} key={index}>
+                <Link
+                    href={
+                        "/countries/" +
+                        DataFormatter.countryNameToUri(country.name)
+                    }
+                    key={index}
+                >
                     <div className={styles.countryCard}>
                         <div className={styles.flagContainer}>
                             <Image
@@ -57,43 +66,81 @@ const CountriesList = () => {
                             />
                         </div>
                         <div className={styles.informations}>
-                            <p className={styles.name}>{country.name}</p>
-                            <p>
-                                <span className={styles.field}>
-                                    Population:
-                                </span>{" "}
-                                {DataFormatter.formatNumber(country.population)}
-                            </p>
-                            <p>
-                                <span className={styles.field}>Region:</span>{" "}
-                                {country.region}
-                            </p>
-                            <p>
-                                <span className={styles.field}>Capital:</span>{" "}
-                                {country.capital}
-                            </p>
+                            <h2 className={styles.name}>{country.name}</h2>
+                            <ul>
+                                <li>
+                                    <span className={styles.field}>
+                                        Population:
+                                    </span>{" "}
+                                    {DataFormatter.formatNumber(
+                                        country.population
+                                    )}
+                                </li>
+                                <li>
+                                    <span className={styles.field}>
+                                        Region:
+                                    </span>{" "}
+                                    {country.region}
+                                </li>
+                                <li>
+                                    <span className={styles.field}>
+                                        Capital:
+                                    </span>{" "}
+                                    {country.capital}
+                                </li>
+                            </ul>
                         </div>
                     </div>
                 </Link>
             );
         });
+
+        // If no countries available after filters
+        if (content.length === 0) {
+            noResult = true;
+            content = (
+                <div className={styles.noResult}>
+                    <Image
+                        alt={
+                            "A man is watching a map trying to find " +
+                            searchBar +
+                            " on earth"
+                        }
+                        src={noResultImage}
+                        width="225"
+                        height="225"
+                    />
+                    <h2>
+                        {region === null
+                            ? DataFormatter.capitalize(searchBar) +
+                              "  seems not to be found on our earth!"
+                            : DataFormatter.capitalize(searchBar) +
+                              " seems not to be found in " +
+                              region +
+                              "!"}
+                    </h2>
+                </div>
+            );
+        }
     }
 
     return (
         <div>
-            <form className={styles.filters}>
+            <section className={styles.filters}>
                 <SearchBar className={styles.input} />
                 <FilterByRegionDropdown className={styles.regionFilter} />
-            </form>
-            <div
+            </section>
+            <section
                 className={
                     loading
                         ? styles.loading + " " + styles.countriesList
+                        : noResult
+                        ? styles.noResult
                         : styles.countriesList
                 }
             >
                 {content}
-            </div>
+            </section>
         </div>
     );
 };

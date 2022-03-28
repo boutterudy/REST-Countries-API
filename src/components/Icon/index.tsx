@@ -2,9 +2,10 @@ type Props = {
     lib: "remix-icon";
     icon: string;
     className?: string;
+    onClick?: () => void;
 };
 
-const Icon = ({ lib, icon, className }: Props) => {
+const Icon = ({ lib, icon, className, onClick }: Props) => {
     const classNames = lib === "remix-icon" ? "ri-" + icon : "";
     return (
         <i
@@ -13,6 +14,7 @@ const Icon = ({ lib, icon, className }: Props) => {
                     ? className + " " + classNames
                     : classNames
             }
+            onClick={onClick}
         ></i>
     );
 };

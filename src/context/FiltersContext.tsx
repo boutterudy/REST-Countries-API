@@ -1,5 +1,6 @@
 import { createContext, ReactNode, useContext, useState } from "react";
 import Country from "../types/country";
+import DataFormatter from "../utils/DataFormatter";
 
 type filtersType = {
     searchBar: string | null;
@@ -42,14 +43,17 @@ export function FiltersProvider({ children }: Props) {
     const filterByName = (countries: Country[]) => {
         return searchBar !== null
             ? countries.filter((country) =>
-                  country.name.toLowerCase().includes(searchBar.toLowerCase())
+                  DataFormatter.removeAccents(country.name)
+                      .toLowerCase()
+                      .includes(searchBar.toLowerCase())
               )
             : countries;
     };
 
     // Filter countries function
     const filterCountries = (countries: Country[]) => {
-        return filterByRegion(filterByName(countries));
+        let filtered = filterByRegion(filterByName(countries));
+        return filtered.length === 0 ? [] : filtered;
     };
 
     const value = {

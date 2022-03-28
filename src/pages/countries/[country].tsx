@@ -2,6 +2,7 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import CountryDetails from "../../components/CountryDetails";
 import Header from "../../components/Header";
+import DataFormatter from "../../utils/DataFormatter";
 
 const CountryPage = () => {
     const router = useRouter();
@@ -10,9 +11,6 @@ const CountryPage = () => {
     return (
         <div>
             <Head>
-                <title>
-                    {country} - REST Countries API with color theme switcher
-                </title>
                 <meta
                     name="description"
                     content="Made with <3 by Rudy B. This is my solution for REST Countries API FrontendMentor challenge."

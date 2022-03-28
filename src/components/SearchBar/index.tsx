@@ -43,6 +43,14 @@ const SearchBar = ({ className }: Props) => {
                 }
                 value={searchBar !== null ? searchBar : ""}
             />
+            {searchBar !== null ? (
+                <Icon
+                    lib="remix-icon"
+                    icon="close-line"
+                    className={styles.clearIcon}
+                    onClick={() => setSearchBar(null)}
+                />
+            ) : null}
         </div>
     );
 };

@@ -29,6 +29,22 @@
     margin: auto;
 }
 
+.noResult {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+
+    @include themed() {
+        color: t($text);
+    }
+
+    img {
+        user-select: none;
+    }
+}
+
 .countriesList {
     position: relative;
     z-index: 50;
@@ -77,9 +93,19 @@
             padding: 30px 24px;
             font-size: $text-size;
 
-            p {
-                margin-top: 5px;
-                margin-bottom: 5px;
+            ul {
+                list-style: none;
+                padding: 0;
+                margin: 0;
+
+                li {
+                    margin-top: 5px;
+                    margin-bottom: 5px;
+
+                    .field {
+                        font-weight: 600;
+                    }
+                }
             }
 
             .name {
@@ -87,10 +113,6 @@
                 margin-top: 0;
                 margin-bottom: 26px;
                 font-size: 1.2rem;
-            }
-
-            .field {
-                font-weight: 600;
             }
         }
     }

@@ -15,6 +15,18 @@
         }
     }
 
+    .clearIcon {
+        font-size: 1rem;
+        position: absolute;
+        top: 36%;
+        right: 32px;
+        cursor: pointer;
+
+        @include themed() {
+            color: t($text);
+        }
+    }
+
     .input {
         font-size: $text-size;
         padding: 18px 74px;
