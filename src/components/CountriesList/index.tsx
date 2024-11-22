@@ -1,4 +1,4 @@
-import Image from "next/legacy/image";
+import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useContext, useEffect, useState } from "react";
@@ -46,7 +46,7 @@ const CountriesList = () => {
         // Filter countries
         content = filterCountries(countries).map((country, index) => {
             return (
-                <Link
+                (<Link
                     href={
                         "/countries/" +
                         DataFormatter.countryNameToUri(country.name)
@@ -58,13 +58,15 @@ const CountriesList = () => {
                             <Image
                                 src={country.flags.svg}
                                 alt={country.name + " flag"}
-                                layout="fill"
-                                objectFit="cover"
                                 quality={100}
                                 className={styles.flag}
-                                objectPosition="50% 50%"
                                 priority={true}
-                            />
+                                fill
+                                sizes="100vw"
+                                style={{
+                                    objectFit: "cover",
+                                    objectPosition: "50% 50%"
+                                }} />
                         </div>
                         <div className={styles.informations}>
                             <h2 className={styles.name}>{country.name}</h2>
@@ -94,7 +96,7 @@ const CountriesList = () => {
                             </ul>
                         </div>
                     </div>
-                </Link>
+                </Link>)
             );
         });
 
@@ -112,7 +114,10 @@ const CountriesList = () => {
                         src={noResultImage}
                         width="225"
                         height="225"
-                    />
+                        style={{
+                            maxWidth: "100%",
+                            height: "auto"
+                        }} />
                     <h2>
                         {region === null
                             ? DataFormatter.capitalize(searchBar) +

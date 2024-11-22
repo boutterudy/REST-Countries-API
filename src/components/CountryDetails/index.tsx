@@ -1,5 +1,5 @@
 import Head from "next/head";
-import Image from "next/legacy/image";
+import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useContext, useEffect, useState } from "react";
@@ -68,12 +68,14 @@ const CountryDetails = ({ country }: Props) => {
                         <Image
                             src={details.flags.svg}
                             alt={details.name + " flag"}
-                            layout="fill"
                             quality={100}
-                            objectFit="contain"
-                            objectPosition="50% 0"
                             priority={true}
-                        />
+                            fill
+                            sizes="100vw"
+                            style={{
+                                objectFit: "contain",
+                                objectPosition: "50% 0"
+                            }} />
                     </div>
                     <div
                         className={
