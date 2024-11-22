@@ -52,7 +52,7 @@ const CountriesList = () => {
                         DataFormatter.countryNameToUri(country.name)
                     }
                     key={index}
-                >
+                    legacyBehavior>
                     <div className={styles.countryCard}>
                         <div className={styles.flagContainer}>
                             <Image

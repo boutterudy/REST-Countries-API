@@ -159,11 +159,7 @@ const CountryDetails = ({ country }: Props) => {
                             {borders.length > 0 ? (
                                 <li className={styles.list}>
                                     {borders.map((country, index) => (
-                                        <Link
-                                            href={"/countries/" + country.name}
-                                            key={index}
-                                            passHref
-                                        >
+                                        <Link href={"/countries/" + country.name} key={index} passHref legacyBehavior>
                                             <button>{country.name}</button>
                                         </Link>
                                     ))}
