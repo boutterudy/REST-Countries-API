@@ -2,57 +2,43 @@ import styles from "./SearchBar.module.scss";
 import Icon from "../Icon";
 import { useContext, useEffect } from "react";
 import { FiltersContext } from "../../context/FiltersContext";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 
 type Props = {
-    className?: string;
+  className?: string;
 };
 
 const SearchBar = ({ className }: Props) => {
-    const { searchBar, setSearchBar } = useContext(FiltersContext);
-    const router = useRouter();
+  const { searchBar, setSearchBar } = useContext(FiltersContext);
 
-    useEffect(() => {
-        if (false) {
-            if (searchBar !== null) {
-                console.log("searchBar", searchBar);
-                router.push("/?search=" + searchBar, undefined, {
-                    shallow: true,
-                });
-            } else {
-                router.push("/", undefined, { shallow: true });
-            }
+  return (
+    <div
+      className={
+        className !== undefined
+          ? className + " " + styles.searchBar
+          : styles.searchBar
+      }
+    >
+      <Icon lib="remix-icon" icon="search-line" className={styles.icon} />
+      <input
+        className={styles.input}
+        type="text"
+        placeholder="Search for a country..."
+        onChange={(e) =>
+          setSearchBar(e.target.value !== "" ? e.target.value : null)
         }
-    }, [searchBar]);
-
-    return (
-        <div
-            className={
-                className !== undefined
-                    ? className + " " + styles.searchBar
-                    : styles.searchBar
-            }
-        >
-            <Icon lib="remix-icon" icon="search-line" className={styles.icon} />
-            <input
-                className={styles.input}
-                type="text"
-                placeholder="Search for a country..."
-                onChange={(e) =>
-                    setSearchBar(e.target.value !== "" ? e.target.value : null)
-                }
-                value={searchBar !== null ? searchBar : ""}
-            />
-            {searchBar !== null ? (
-                <Icon
-                    lib="remix-icon"
-                    icon="close-line"
-                    className={styles.clearIcon}
-                    onClick={() => setSearchBar(null)}
-                />
-            ) : null}
-        </div>
-    );
+        value={searchBar !== null ? searchBar : ""}
+      />
+      {searchBar !== null ? (
+        <Icon
+          lib="remix-icon"
+          icon="close-line"
+          className={styles.clearIcon}
+          onClick={() => setSearchBar(null)}
+        />
+      ) : null}
+    </div>
+  );
 };
 
 export default SearchBar;

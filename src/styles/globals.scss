@@ -3,40 +3,40 @@
 
 html,
 body {
-    padding: 0;
-    margin: 0;
+  padding: 0;
+  margin: 0;
 }
 
 a {
-    color: inherit;
-    text-decoration: none;
+  color: inherit;
+  text-decoration: none;
 }
 
 .preload * {
-    transition: none !important;
+  transition: none !important;
 }
 
 * {
-    box-sizing: border-box;
-    font-family: "Nunito Sans", sans-serif;
-    font-weight: 300;
-    transition: background 300ms ease;
+  box-sizing: border-box;
+  font-family: "Nunito Sans", sans-serif;
+  font-weight: 300;
+  transition: background 300ms ease;
 }
 
 header {
-    display: flex;
-    background-color: white;
+  display: flex;
+  background-color: white;
 }
 
 #content {
-    padding: 48px 70px;
-    min-height: calc(100vh - 70px);
+  padding: 48px 70px;
+  min-height: calc(100vh - 70px);
 
-    @include gthemed() {
-        background-color: t($bg);
-    }
+  @include gthemed() {
+    background-color: t($bg);
+  }
 
-    @media (max-width: $bp-tablet) {
-        padding: 26px 22px;
-    }
+  @media (max-width: $bp-tablet) {
+    padding: 26px 22px;
+  }
 }

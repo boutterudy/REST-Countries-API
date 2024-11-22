@@ -1,17 +1,20 @@
 import styles from "./Loader.module.scss";
+import { CSSProperties } from 'react';
 
 type Props = {
-    className?: string;
+  className?: string;
+  style?: CSSProperties;
 };
-const Loader = ({ className }: Props) => {
-    return (
-        <span
-            className={
-                className !== undefined
-                    ? className + " " + styles.loader
-                    : styles.loader
-            }
-        ></span>
-    );
+const Loader = ({ className, style}: Props) => {
+  return (
+    <span
+      className={
+        className !== undefined
+          ? className + " " + styles.loader
+          : styles.loader
+      }
+      style={style}
+    ></span>
+  );
 };
 export default Loader;

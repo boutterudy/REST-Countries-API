@@ -2,57 +2,57 @@
 @use "src/styles/variables" as *;
 
 .searchBar {
-    position: relative;
+  position: relative;
 
-    .icon {
-        font-size: 1rem;
-        position: absolute;
-        top: 35%;
-        left: 32px;
+  .icon {
+    font-size: 1rem;
+    position: absolute;
+    top: 35%;
+    left: 32px;
 
-        @include themed() {
-            color: t($text);
-        }
+    @include themed() {
+      color: t($text);
+    }
+  }
+
+  .clearIcon {
+    font-size: 1rem;
+    position: absolute;
+    top: 36%;
+    right: 32px;
+    cursor: pointer;
+
+    @include themed() {
+      color: t($text);
+    }
+  }
+
+  .input {
+    font-size: $text-size;
+    padding: 18px 74px;
+    width: 100%;
+    border: none;
+    border-radius: $border-radius;
+    box-shadow: $shadow;
+
+    @media (max-width: $bp-tablet) {
+      padding: 18px 18px 18px 74px;
     }
 
-    .clearIcon {
-        font-size: 1rem;
-        position: absolute;
-        top: 36%;
-        right: 32px;
-        cursor: pointer;
-
-        @include themed() {
-            color: t($text);
-        }
+    @include themed() {
+      color: t($text);
+      background-color: t($card-bg);
     }
 
-    .input {
-        font-size: $text-size;
-        padding: 18px 74px;
-        width: 100%;
-        border: none;
-        border-radius: $border-radius;
-        box-shadow: $shadow;
-
-        @media (max-width: $bp-tablet) {
-            padding: 18px 18px 18px 74px;
-        }
-
-        @include themed() {
-            color: t($text);
-            background-color: t($card-bg);
-        }
-
-        &::placeholder {
-            opacity: 0.8;
-            @include themed() {
-                color: t($text);
-            }
-        }
-
-        &:focus {
-            outline: none;
-        }
+    &::placeholder {
+      opacity: 0.8;
+      @include themed() {
+        color: t($text);
+      }
     }
+
+    &:focus {
+      outline: none;
+    }
+  }
 }
