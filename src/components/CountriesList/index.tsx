@@ -1,7 +1,7 @@
 'use client';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useContext, useState, useEffect } from 'react';
+import { useContext, useState, useEffect, useMemo } from 'react';
 import { FiltersContext } from '../../context/FiltersContext';
 import Country from '../../types/country';
 import DataFormatter from '../../utils/DataFormatter';
@@ -45,22 +45,30 @@ const CountriesList = ({ countries }: CountriesListProps) => {
   }, []);
 
   // Filtered countries
-  const filteredCountries = filterCountries(countries);
+  const filteredCountries = useMemo(() => filterCountries(countries), [countries, filterCountries]);
 
   // Infinite scrolling
-  useEffect(() => {
-    const handleScroll = () => {
-      const scrollPosition = window.innerHeight + document.documentElement.scrollTop;
-      const scrollHeight = document.documentElement.offsetHeight;
+  const handleScroll = () => {
+    const scrollPosition = window.innerHeight + document.documentElement.scrollTop;
+    const scrollHeight = document.documentElement.offsetHeight;
 
-      if (scrollPosition >= scrollHeight * 0.5) {
-        setVisibleCount((prev) => Math.min(prev + increment, filteredCountries.length));
-      }
+    if (scrollPosition >= scrollHeight * 0.5) {
+      setVisibleCount((prev) => Math.min(prev + increment, filteredCountries.length));
+    }
+  };
+
+  // Debounce the scroll listener
+  useEffect(() => {
+    let timeoutId: NodeJS.Timeout;
+
+    const debouncedScroll = () => {
+      clearTimeout(timeoutId);
+      timeoutId = setTimeout(handleScroll, 200); // Adjust debounce delay as needed
     };
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [filteredCountries, increment]);
+    window.addEventListener('scroll', debouncedScroll);
+    return () => window.removeEventListener('scroll', debouncedScroll);
+  }, [filteredCountries, handleScroll, increment]);
 
   // Generate content
   const content = filteredCountries.slice(0, visibleCount).map((country, index) => (
@@ -77,6 +85,7 @@ const CountriesList = ({ countries }: CountriesListProps) => {
             quality={100}
             className={styles.flag}
             priority={index < increment} // Prioritize loading for the first set of countries
+            loading={index >= increment ? 'lazy' : undefined} // Lazy load non-priority images
             fill
             sizes="100vw"
             style={{
