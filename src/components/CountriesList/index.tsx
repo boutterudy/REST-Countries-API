@@ -17,8 +17,32 @@ type CountriesListProps = {
 const CountriesList = ({ countries }: CountriesListProps) => {
   const { filterCountries, searchBar, region } = useContext(FiltersContext);
 
-  const [visibleCount, setVisibleCount] = useState(20); // Tracks how many countries are displayed
+  const [visibleCount, setVisibleCount] = useState(5); // Tracks how many countries are displayed
+  const [increment, setIncrement] = useState(5); // Increment value for visible countries
   const [noResult, setNoResult] = useState(false);
+
+  // Adjust visibleCount and increment based on screen size
+  useEffect(() => {
+    const adjustCountForScreenSize = () => {
+      if (window.innerWidth <= 768) {
+        setVisibleCount(5);
+        setIncrement(5);
+      } else if (window.innerWidth <= 1024) {
+        setVisibleCount(10);
+        setIncrement(10);
+      } else {
+        setVisibleCount(20);
+        setIncrement(20);
+      }
+    };
+
+    adjustCountForScreenSize(); // Set initial values
+    window.addEventListener('resize', adjustCountForScreenSize);
+
+    return () => {
+      window.removeEventListener('resize', adjustCountForScreenSize);
+    };
+  }, []);
 
   // Filtered countries
   const filteredCountries = filterCountries(countries);
@@ -30,13 +54,13 @@ const CountriesList = ({ countries }: CountriesListProps) => {
       const scrollHeight = document.documentElement.offsetHeight;
 
       if (scrollPosition >= scrollHeight * 0.5) {
-        setVisibleCount((prev) => Math.min(prev + 20, filteredCountries.length));
+        setVisibleCount((prev) => Math.min(prev + increment, filteredCountries.length));
       }
     };
 
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [filteredCountries]);
+  }, [filteredCountries, increment]);
 
   // Generate content
   const content = filteredCountries.slice(0, visibleCount).map((country, index) => (
@@ -52,7 +76,7 @@ const CountriesList = ({ countries }: CountriesListProps) => {
             alt={country.name + ' flag'}
             quality={100}
             className={styles.flag}
-            priority={index < 20} // Prioritize loading for the first 20 countries
+            priority={index < increment} // Prioritize loading for the first set of countries
             fill
             sizes="100vw"
             style={{
