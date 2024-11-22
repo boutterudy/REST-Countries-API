@@ -20,6 +20,7 @@ const CountriesList = ({ countries }: CountriesListProps) => {
   const [visibleCount, setVisibleCount] = useState(5); // Tracks how many countries are displayed
   const [increment, setIncrement] = useState(5); // Increment value for visible countries
   const [noResult, setNoResult] = useState(false);
+  const [usePng, setUsePng] = useState(false); // Tracks whether to use PNG
 
   // Adjust visibleCount and increment based on screen size
   useEffect(() => {
@@ -27,12 +28,15 @@ const CountriesList = ({ countries }: CountriesListProps) => {
       if (window.innerWidth <= 768) {
         setVisibleCount(5);
         setIncrement(5);
+        setUsePng(true); // Use PNG on mobile
       } else if (window.innerWidth <= 1024) {
         setVisibleCount(10);
         setIncrement(10);
+        setUsePng(true); // Use PNG on tablets
       } else {
         setVisibleCount(20);
         setIncrement(20);
+        setUsePng(false); // Use SVG on larger screens
       }
     };
 
@@ -80,9 +84,9 @@ const CountriesList = ({ countries }: CountriesListProps) => {
       <div className={styles.countryCard}>
         <div className={styles.flagContainer}>
           <Image
-            src={country.flags.svg}
+            src={usePng ? country.flags.png : country.flags.svg} // Use PNG or SVG based on screen size
             alt={country.name + ' flag'}
-            quality={100}
+            quality={80} // Set quality to 80% for PNG (ignored for SVG)
             className={styles.flag}
             priority={index < increment} // Prioritize loading for the first set of countries
             loading={index >= increment ? 'lazy' : undefined} // Lazy load non-priority images
