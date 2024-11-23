@@ -56,7 +56,10 @@ const CountriesList = ({ countries }: CountriesListProps) => {
     const scrollPosition = window.innerHeight + document.documentElement.scrollTop;
     const scrollHeight = document.documentElement.offsetHeight;
 
-    if (scrollPosition >= scrollHeight * 0.5) {
+    const isMobile = window.innerWidth <= 768;
+    const scrollThreshold = isMobile ? 0.85 : 0.5; // 85% for mobile, 50% for others
+
+    if (scrollPosition >= scrollHeight * scrollThreshold) {
       setVisibleCount((prev) => Math.min(prev + increment, filteredCountries.length));
     }
   }, [filteredCountries.length, increment]);
