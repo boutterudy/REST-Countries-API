@@ -1,7 +1,7 @@
 'use client';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useContext, useState, useEffect, useMemo } from 'react';
+import { useContext, useState, useEffect, useMemo, useCallback } from 'react';
 import { FiltersContext } from '../../context/FiltersContext';
 import Country from '../../types/country';
 import DataFormatter from '../../utils/DataFormatter';
@@ -52,14 +52,14 @@ const CountriesList = ({ countries }: CountriesListProps) => {
   const filteredCountries = useMemo(() => filterCountries(countries), [countries, filterCountries]);
 
   // Infinite scrolling
-  const handleScroll = () => {
+  const handleScroll = useCallback(() => {
     const scrollPosition = window.innerHeight + document.documentElement.scrollTop;
     const scrollHeight = document.documentElement.offsetHeight;
 
     if (scrollPosition >= scrollHeight * 0.5) {
       setVisibleCount((prev) => Math.min(prev + increment, filteredCountries.length));
     }
-  };
+  }, [filteredCountries.length, increment]);
 
   // Debounce the scroll listener
   useEffect(() => {
@@ -72,7 +72,7 @@ const CountriesList = ({ countries }: CountriesListProps) => {
 
     window.addEventListener('scroll', debouncedScroll);
     return () => window.removeEventListener('scroll', debouncedScroll);
-  }, [filteredCountries, handleScroll, increment]);
+  }, [handleScroll]);
 
   // Generate content
   const content = filteredCountries.slice(0, visibleCount).map((country, index) => (
