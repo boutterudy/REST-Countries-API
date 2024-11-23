@@ -10,11 +10,12 @@ import DataFormatter from '../../../utils/DataFormatter';
 import { redirect } from 'next/navigation';
 import Country from '../../../types/country';
 
-type CountryPageProps = { params: { country: string } };
+type CountryPageProps = { params: Promise<{ country: string }> };
 
-export async function generateMetadata({
-  params,
-}: CountryPageProps): Promise<Metadata> {
+export async function generateMetadata(
+  props: CountryPageProps
+): Promise<Metadata> {
+  const params = await props.params;
   const { country: countryName } = params;
   const countryDetails = await getCountryByName(
     DataFormatter.uriToCountryName(countryName)
@@ -36,7 +37,8 @@ export async function generateMetadata({
   };
 }
 
-export default async function CountryPage({ params }: CountryPageProps) {
+export default async function CountryPage(props: CountryPageProps) {
+  const params = await props.params;
   const { country: countryName } = params;
   const countryDetails = await getCountryByName(
     DataFormatter.uriToCountryName(countryName)
