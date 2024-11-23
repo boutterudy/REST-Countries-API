@@ -102,7 +102,7 @@ const CountriesList = ({ countries }: CountriesListProps) => {
               priority={index < increment} // Prioritize loading for the first set of countries
               loading={index >= increment ? 'lazy' : undefined} // Lazy load non-priority images
               fill
-              sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
+              sizes="100vw"
               style={{
                 objectFit: 'cover',
                 objectPosition: '50% 50%',
