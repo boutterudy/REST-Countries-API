@@ -7,7 +7,12 @@ import { FiltersProvider } from '../context/FiltersContext';
 import Header from '../components/Header';
 import Head from 'next/head';
 
-const nunitoSans = Nunito_Sans({ subsets: ['latin'] });
+const nunitoSans = Nunito_Sans({
+  subsets: ['latin'],
+  variable: '--font-nunito-sans',
+  display: "swap",
+  adjustFontFallback: false
+});
 
 export default function RootLayout({
                                      children,
@@ -21,7 +26,7 @@ export default function RootLayout({
       <link rel="preconnect" href="https://upload.wikimedia.org" />
       <link rel="preconnect" href="https://flagcdn.com" />
     </Head>
-    <body className={nunitoSans.className}>
+    <body className={nunitoSans.variable}>
     <ThemeProvider>
       <FiltersProvider>
         <Header />
