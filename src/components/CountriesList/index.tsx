@@ -17,7 +17,7 @@ type CountriesListProps = {
 const CountriesList = ({ countries }: CountriesListProps) => {
   const { filterCountries, searchBar, region } = useContext(FiltersContext);
 
-  const [visibleCount, setVisibleCount] = useState(5); // Tracks how many countries are displayed
+  const [visibleCount, setVisibleCount] = useState(2); // Tracks how many countries are displayed
   const [increment, setIncrement] = useState(5); // Increment value for visible countries
   const [noResult, setNoResult] = useState(false);
   const [usePng, setUsePng] = useState(false); // Tracks whether to use PNG
@@ -26,7 +26,7 @@ const CountriesList = ({ countries }: CountriesListProps) => {
   useEffect(() => {
     const adjustCountForScreenSize = () => {
       if (window.innerWidth <= 768) {
-        setVisibleCount(5);
+        setVisibleCount(2);
         setIncrement(5);
         setUsePng(true); // Use PNG on mobile
       } else if (window.innerWidth <= 1024) {
