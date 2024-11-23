@@ -13,7 +13,7 @@
     "next": "^14.2.18",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "sass": "^1.49.9",
+    "sass": "^1.81.0",
     "sharp": "^0.33.5"
   },
   "devDependencies": {
