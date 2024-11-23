@@ -3,7 +3,7 @@
 import Country from '../../types/country';
 
 export const getAllCountries = async (): Promise<Country[]> => {
-  const url = 'https://restcountries.com/v2/all';
+  const url = 'https://restcountries.com/v2/all?fields=name,flags,population,region,capital';
   return fetch(url).then((data) => {
     return data.json();
   });
