@@ -2,9 +2,18 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ["upload.wikimedia.org", "flagcdn.com"],
     dangerouslyAllowSVG: true,
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "upload.wikimedia.org",
+      },
+      {
+        protocol: "https",
+        hostname: "flagcdn.com",
+      },
+    ],
   },
   i18n: {
     locales: ["en"],
