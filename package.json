@@ -3,23 +3,33 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
   },
   "dependencies": {
-    "next": "12.1.0",
-    "react": "17.0.2",
-    "react-dom": "17.0.2",
-    "remixicon": "^2.5.0",
-    "sass": "^1.49.9"
+    "@remixicon/react": "^4.5.0",
+    "next": "15.0.3",
+    "react": "19.0.0-rc-66855b96-20241106",
+    "react-dom": "19.0.0-rc-66855b96-20241106",
+    "sass": "^1.81.0",
+    "sharp": "^0.33.5"
   },
   "devDependencies": {
-    "@types/node": "17.0.21",
-    "@types/react": "17.0.40",
-    "eslint": "8.11.0",
-    "eslint-config-next": "12.1.0",
-    "typescript": "4.6.2"
+    "@types/node": "^22.9.1",
+    "@types/react": "npm:types-react@19.0.0-rc.1",
+    "@types/react-dom": "npm:types-react-dom@19.0.0-rc.1",
+    "eslint": "8.57.1",
+    "eslint-config-next": "15.0.3",
+    "prettier": "^3.3.3",
+    "typescript": "^5.7.2"
+  },
+  "overrides": {
+    "@types/react": "npm:types-react@19.0.0-rc.1",
+    "@types/react-dom": "npm:types-react-dom@19.0.0-rc.1",
+    "@remixicon/react": {
+        "react": "19.0.0-rc-66855b96-20241106"
+    }
   }
 }
