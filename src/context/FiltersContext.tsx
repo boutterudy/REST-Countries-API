@@ -1,7 +1,7 @@
-"use client";
-import { createContext, ReactNode, useContext, useState } from "react";
-import Country from "../types/country";
-import DataFormatter from "../utils/DataFormatter";
+'use client';
+import { createContext, ReactNode, useContext, useState } from 'react';
+import Country from '../types/country';
+import DataFormatter from '../utils/DataFormatter';
 
 type filtersType = {
   searchBar: string | null;
@@ -46,7 +46,7 @@ export function FiltersProvider({ children }: Props) {
       ? countries.filter((country) =>
           DataFormatter.removeAccents(country.name)
             .toLowerCase()
-            .includes(searchBar.toLowerCase()),
+            .includes(searchBar.toLowerCase())
         )
       : countries;
   };

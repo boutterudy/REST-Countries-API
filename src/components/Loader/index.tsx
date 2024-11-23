@@ -1,16 +1,16 @@
-import styles from "./Loader.module.scss";
+import styles from './Loader.module.scss';
 import { CSSProperties } from 'react';
 
 type Props = {
   className?: string;
   style?: CSSProperties;
 };
-const Loader = ({ className, style}: Props) => {
+const Loader = ({ className, style }: Props) => {
   return (
     <span
       className={
         className !== undefined
-          ? className + " " + styles.loader
+          ? className + ' ' + styles.loader
           : styles.loader
       }
       style={style}

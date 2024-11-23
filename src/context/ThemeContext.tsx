@@ -1,5 +1,5 @@
-"use client";
-import React, { createContext, useEffect, useState } from "react";
+'use client';
+import React, { createContext, useEffect, useState } from 'react';
 
 type Props = {
   children: React.ReactNode;
@@ -17,8 +17,8 @@ const ThemeProvider = ({ children }: Props) => {
 
   useEffect(() => {
     const d = document.documentElement;
-    d.classList.remove("preload");
-    const lsDark = localStorage.getItem("dark");
+    d.classList.remove('preload');
+    const lsDark = localStorage.getItem('dark');
     if (lsDark !== null) {
       setDark(JSON.parse(lsDark));
     }
@@ -26,18 +26,18 @@ const ThemeProvider = ({ children }: Props) => {
 
   const toggleDark = () => {
     const d = document.documentElement;
-    const themes = ["theme--default", "theme--dark"];
+    const themes = ['theme--default', 'theme--dark'];
     if (dark) {
       d.classList.remove(...themes);
-      d.classList.add("theme");
-      d.classList.add("theme--default");
+      d.classList.add('theme');
+      d.classList.add('theme--default');
       // "theme " + (darkMode ? "theme--dark" : "theme--default")
     } else {
       d.classList.remove(...themes);
-      d.classList.add("theme");
-      d.classList.add("theme--dark");
+      d.classList.add('theme');
+      d.classList.add('theme--dark');
     }
-    localStorage.setItem("dark", JSON.stringify(!dark));
+    localStorage.setItem('dark', JSON.stringify(!dark));
     setDark(!dark);
   };
 

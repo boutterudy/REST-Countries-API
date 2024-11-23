@@ -6,18 +6,18 @@ const nextConfig = {
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
     remotePatterns: [
       {
-        protocol: "https",
-        hostname: "upload.wikimedia.org",
+        protocol: 'https',
+        hostname: 'upload.wikimedia.org',
       },
       {
-        protocol: "https",
-        hostname: "flagcdn.com",
+        protocol: 'https',
+        hostname: 'flagcdn.com',
       },
     ],
   },
   i18n: {
-    locales: ["en"],
-    defaultLocale: "en",
+    locales: ['en'],
+    defaultLocale: 'en',
   },
 };
 

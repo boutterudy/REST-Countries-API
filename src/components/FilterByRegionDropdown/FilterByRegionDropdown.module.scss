@@ -1,5 +1,5 @@
-@use "src/styles/color-themes" as *;
-@use "src/styles/variables" as *;
+@use 'src/styles/color-themes' as *;
+@use 'src/styles/variables' as *;
 
 .dropdown {
   user-select: none;
@@ -16,10 +16,6 @@
     padding: 16px 10px 16px 24px;
     cursor: pointer;
     font-size: $text-size;
-
-    .icon {
-      font-size: 1.5rem;
-    }
   }
 
   .dropdownContent {

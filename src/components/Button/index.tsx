@@ -1,5 +1,5 @@
-import { NextPage } from "next";
-import styles from "./Button.module.scss";
+import { NextPage } from 'next';
+import styles from './Button.module.scss';
 
 interface Props {
   className?: string;
@@ -13,7 +13,7 @@ const Button: NextPage<Props> = (props) => {
     <button
       className={
         className !== undefined
-          ? className + " " + styles.button
+          ? className + ' ' + styles.button
           : styles.button
       }
       onClick={onClick !== undefined ? onClick : undefined}

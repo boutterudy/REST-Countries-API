@@ -1,8 +1,7 @@
-import styles from "./SearchBar.module.scss";
-import Icon from "../Icon";
-import { useContext, useEffect } from "react";
-import { FiltersContext } from "../../context/FiltersContext";
-import { useRouter } from "next/navigation";
+import styles from './SearchBar.module.scss';
+import { useContext, useEffect } from 'react';
+import { FiltersContext } from '../../context/FiltersContext';
+import { RiSearchLine, RiCloseLine } from '@remixicon/react';
 
 type Props = {
   className?: string;
@@ -15,24 +14,23 @@ const SearchBar = ({ className }: Props) => {
     <div
       className={
         className !== undefined
-          ? className + " " + styles.searchBar
+          ? className + ' ' + styles.searchBar
           : styles.searchBar
       }
     >
-      <Icon lib="remix-icon" icon="search-line" className={styles.icon} />
+      <RiSearchLine size="1rem" className={styles.icon} />
       <input
         className={styles.input}
         type="text"
         placeholder="Search for a country..."
         onChange={(e) =>
-          setSearchBar(e.target.value !== "" ? e.target.value : null)
+          setSearchBar(e.target.value !== '' ? e.target.value : null)
         }
-        value={searchBar !== null ? searchBar : ""}
+        value={searchBar !== null ? searchBar : ''}
       />
       {searchBar !== null ? (
-        <Icon
-          lib="remix-icon"
-          icon="close-line"
+        <RiCloseLine
+          size="1rem"
           className={styles.clearIcon}
           onClick={() => setSearchBar(null)}
         />

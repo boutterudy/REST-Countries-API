@@ -1,7 +1,7 @@
 import { redirect } from 'next/navigation';
 
 function NotFoundPage() {
-  return redirect('/')
+  return redirect('/');
 }
 
-export default NotFoundPage
+export default NotFoundPage;

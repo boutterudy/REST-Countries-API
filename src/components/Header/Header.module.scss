@@ -1,5 +1,5 @@
-@use "src/styles/color-themes" as *;
-@use "src/styles/variables" as *;
+@use 'src/styles/color-themes' as *;
+@use 'src/styles/variables' as *;
 
 .header {
   display: flex;
@@ -39,7 +39,6 @@
 
     .icon {
       margin-right: 10px;
-      font-size: calc($text-size + 0.2rem);
     }
   }
 }

@@ -1,5 +1,5 @@
-@use "src/styles/color-themes" as *;
-@use "src/styles/variables" as *;
+@use 'src/styles/color-themes' as *;
+@use 'src/styles/variables' as *;
 
 .page {
   min-height: calc(100vh - 80px - (48px * 2));
@@ -18,7 +18,6 @@
       position: absolute;
       top: 33%;
       left: 20px;
-      font-size: 1rem;
     }
   }
 

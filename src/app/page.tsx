@@ -3,18 +3,19 @@ import { Metadata } from 'next';
 import { getAllCountries } from '../utils/RestCountries';
 import { DynamicFavicon } from '../components/DynamicFavicon';
 
-export async function generateMetadata(
-): Promise<Metadata> {
+export async function generateMetadata(): Promise<Metadata> {
   const countries = await getAllCountries();
-  const favicon = countries[Math.floor(Math.random() * countries.length)].flags.svg;
+  const favicon =
+    countries[Math.floor(Math.random() * countries.length)].flags.svg;
 
   return {
-    title: "REST Countries API with color theme switcher",
-    description: "Made with <3 by Rudy B. This is my solution for REST Countries API FrontendMentor challenge.",
+    title: 'REST Countries API with color theme switcher',
+    description:
+      'Made with <3 by Rudy B. This is my solution for REST Countries API FrontendMentor challenge.',
     icons: {
       icon: favicon,
-    }
-  }
+    },
+  };
 }
 
 export default async function HomePage() {
@@ -25,5 +26,5 @@ export default async function HomePage() {
       <CountriesList countries={countries} />
       <DynamicFavicon countries={countries} />
     </main>
-  )
+  );
 }

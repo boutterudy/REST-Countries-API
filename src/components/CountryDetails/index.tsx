@@ -1,21 +1,23 @@
-'use client'
-import Head from "next/head";
-import Image from "next/image";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
-import Country from "../../types/country";
-import DataFormatter from "../../utils/DataFormatter";
-import Button from "../Button";
-import Icon from "../Icon";
-import Loader from "../Loader";
-import styles from "./CountryDetails.module.scss";
+'use client';
+import Image from 'next/image';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import Country from '../../types/country';
+import DataFormatter from '../../utils/DataFormatter';
+import Button from '../Button';
+import Loader from '../Loader';
+import styles from './CountryDetails.module.scss';
+import { RiArrowLeftLine } from '@remixicon/react';
 
 type Props = {
   country: Country;
   borderCountries: Array<Country>;
 };
 
-const CountryDetails = ({ country: details, borderCountries: borders }: Props) => {
+const CountryDetails = ({
+  country: details,
+  borderCountries: borders,
+}: Props) => {
   const router = useRouter();
 
   let content;
@@ -24,23 +26,18 @@ const CountryDetails = ({ country: details, borderCountries: borders }: Props) =
   } else {
     content = (
       <div>
-        <Head>
-          <title>
-            {details.name} - REST Countries API with color theme switcher
-          </title>
-        </Head>
         <div className={styles.country}>
           <div className={styles.flagContainer}>
             <Image
               src={details.flags.svg}
-              alt={details.name + " flag"}
+              alt={details.name + ' flag'}
               quality={100}
               priority={true}
               fill
               sizes="100vw"
               style={{
-                objectFit: "contain",
-                objectPosition: "50% 0",
+                objectFit: 'contain',
+                objectPosition: '50% 0',
               }}
             />
           </div>
@@ -48,59 +45,59 @@ const CountryDetails = ({ country: details, borderCountries: borders }: Props) =
             className={
               borders.length > 0
                 ? styles.informations
-                : styles.informations + " " + styles.noBorder
+                : styles.informations + ' ' + styles.noBorder
             }
           >
             <h2 className={styles.title}>{details.name}</h2>
             <ul className={styles.details}>
               <div>
                 <li>
-                  <span className={styles.field}>Native Name:</span>{" "}
+                  <span className={styles.field}>Native Name:</span>{' '}
                   {details.nativeName}
                 </li>
                 <li>
-                  <span className={styles.field}>Population:</span>{" "}
+                  <span className={styles.field}>Population:</span>{' '}
                   {DataFormatter.formatNumber(details.population)}
                 </li>
                 <li>
                   <span className={styles.field}>Region:</span> {details.region}
                 </li>
                 <li>
-                  <span className={styles.field}>Sub Region:</span>{" "}
+                  <span className={styles.field}>Sub Region:</span>{' '}
                   {details.subregion}
                 </li>
                 <li>
-                  <span className={styles.field}>Capital:</span>{" "}
-                  {details.capital ? details.capital : "No capital"}
+                  <span className={styles.field}>Capital:</span>{' '}
+                  {details.capital ? details.capital : 'No capital'}
                 </li>
               </div>
               <div>
                 <li>
-                  <span className={styles.field}>Top Level Domain:</span>{" "}
+                  <span className={styles.field}>Top Level Domain:</span>{' '}
                   {details.topLevelDomain}
                 </li>
                 <li>
-                  <span className={styles.field}>Currencies:</span>{" "}
+                  <span className={styles.field}>Currencies:</span>{' '}
                   {details.currencies === undefined
-                    ? "No currency"
-                    : details.currencies.map((cur) => cur.name).join(", ")}
+                    ? 'No currency'
+                    : details.currencies.map((cur) => cur.name).join(', ')}
                 </li>
                 <li>
-                  <span className={styles.field}>Languages:</span>{" "}
-                  {details.languages.map((lang) => lang.name).join(", ")}
+                  <span className={styles.field}>Languages:</span>{' '}
+                  {details.languages.map((lang) => lang.name).join(', ')}
                 </li>
               </div>
             </ul>
             <ul className={styles.borderCountries}>
               <p>
                 <span className={styles.field}>Border Countries:</span>
-                {borders.length === 0 ? " No country" : null}
+                {borders.length === 0 ? ' No country' : null}
               </p>
               {borders.length > 0 ? (
                 <li className={styles.list}>
                   {borders.map((country, index) => (
                     <Link
-                      href={"/countries/" + country.name}
+                      href={'/countries/' + country.name}
                       key={index}
                       passHref
                       legacyBehavior
@@ -120,8 +117,7 @@ const CountryDetails = ({ country: details, borderCountries: borders }: Props) =
   return (
     <div className={styles.page}>
       <Button onClick={() => router.back()} className={styles.backButton}>
-        <Icon lib="remix-icon" icon="arrow-left-line" className={styles.icon} />{" "}
-        Back
+        <RiArrowLeftLine className={styles.icon} size="1rem" /> Back
       </Button>
       <div>{content}</div>
     </div>

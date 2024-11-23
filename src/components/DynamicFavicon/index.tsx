@@ -4,16 +4,19 @@ import { useEffect } from 'react';
 import Country from '../../types/country';
 
 type DynamicFaviconProps = {
-  countries: Array<Country>
-}
+  countries: Array<Country>;
+};
 
 export const DynamicFavicon = ({ countries }: DynamicFaviconProps) => {
   useEffect(() => {
     const changeFavicon = () => {
-      const randomCountry = countries[Math.floor(Math.random() * countries.length)];
+      const randomCountry =
+        countries[Math.floor(Math.random() * countries.length)];
       const faviconUrl = randomCountry.flags.svg;
 
-      let link = document.querySelector("link[rel*='icon']") as HTMLLinkElement | null;
+      let link = document.querySelector(
+        "link[rel*='icon']"
+      ) as HTMLLinkElement | null;
       if (!link) {
         link = document.createElement('link');
         link.type = 'image/svg+xml';

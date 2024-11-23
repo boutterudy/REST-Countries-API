@@ -1,5 +1,4 @@
 import '../styles/globals.scss';
-import 'remixicon/fonts/remixicon.css';
 import Script from 'next/script';
 import { Nunito_Sans } from 'next/font/google';
 import { ThemeProvider } from '../context/ThemeContext';
@@ -10,34 +9,34 @@ import Head from 'next/head';
 const nunitoSans = Nunito_Sans({
   subsets: ['latin'],
   variable: '--font-nunito-sans',
-  display: "swap",
-  adjustFontFallback: false
+  display: 'swap',
+  adjustFontFallback: false,
 });
 
 export default function RootLayout({
-                                     children,
-                                   }: {
+  children,
+}: {
   children: React.ReactNode;
 }) {
   return (
     <html lang="en">
-    <Head>
-      <link rel="preconnect" href="https://restcountries.com" />
-      <link rel="preconnect" href="https://upload.wikimedia.org" />
-      <link rel="preconnect" href="https://flagcdn.com" />
-    </Head>
-    <body className={nunitoSans.variable}>
-    <ThemeProvider>
-      <FiltersProvider>
-        <Header />
-        {children}
-      </FiltersProvider>
-    </ThemeProvider>
-    </body>
-    <Script
-      id="theme"
-      dangerouslySetInnerHTML={{
-        __html: `(function() {
+      <Head>
+        <link rel="preconnect" href="https://restcountries.com" />
+        <link rel="preconnect" href="https://upload.wikimedia.org" />
+        <link rel="preconnect" href="https://flagcdn.com" />
+      </Head>
+      <body className={nunitoSans.variable}>
+        <ThemeProvider>
+          <FiltersProvider>
+            <Header />
+            {children}
+          </FiltersProvider>
+        </ThemeProvider>
+      </body>
+      <Script
+        id="theme"
+        dangerouslySetInnerHTML={{
+          __html: `(function() {
                         var storageKey = 'dark';
                         var classNameDark = 'theme--dark';
                         var classNameLight = 'theme--default';
@@ -63,8 +62,8 @@ export default function RootLayout({
                         }
                         d.classList.add('preload');
                       })();`,
-      }}
-    />
+        }}
+      />
     </html>
   );
 }
